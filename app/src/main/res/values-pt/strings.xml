@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Consulta Mais</string>
+    <string name="password">Senha</string>
+    <string name="login">Login</string>
+    <string name="patients">Pacientes</string>
+    <string name="logout">Sair</string>
+    <string name="action_settings">Configurações</string>
+    <string name="title_activity_principal_agente">Agente</string>
+</resources>

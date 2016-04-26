@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Consulta Mais</string>
+    <string name="patients">Patients</string>
+    <string name="logout">Logout</string>
+</resources>
