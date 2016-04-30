@@ -7,4 +7,5 @@
     <string name="logout">Sair</string>
     <string name="action_settings">Configurações</string>
     <string name="title_activity_principal_agente">Agente</string>
+    <string name="sing_in">Entrar</string>
 </resources>

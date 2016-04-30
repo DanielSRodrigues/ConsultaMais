@@ -25,8 +25,14 @@ public class DB {
 
     static public ArrayList<Atendimento> Atendimentos = new ArrayList<Atendimento>() {{
         // String paciente, String especialidadeMedico, Date dataHoraAtendimento
-        add(new Atendimento("Felipe Generico", "Clinico Geral", new Date()));
-        add(new Atendimento("Elton", "Pediatra", new Date()));
-        add(new Atendimento("Marcia", "Pediatra", new Date()));
+        add(new Atendimento("Felipe Generico", "Clinico Geral", new Date(), "Daniel Magalhães"));
+        add(new Atendimento("Elton", "Pediatra", new Date(), "Daniel Magalhães"));
+        add(new Atendimento("Marcia", "Pediatra", new Date(), "Daniel Magalhães"));
+        add(new Atendimento("Jurandir Araujo Santos", "Pediatra", new Date(), "Daniel Magalhães"));
+        add(new Atendimento("Raissa Guerra de Magalhães Melo", "Ortopedista", new Date(), "Daniel Magalhães"));
+        add(new Atendimento("Ana Cristina de Souza Bezerra", "Pediatra", new Date(), "Daniel Magalhães"));
+        add(new Atendimento("Ivlison Souza", "Pediatra", new Date(), "Daniel Magalhães"));
+        add(new Atendimento("Nelson Glauber", "Pediatra", new Date(), "Daniel Magalhães"));
+
     }};
 }

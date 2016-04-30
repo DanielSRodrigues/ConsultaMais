@@ -9,13 +9,23 @@ import java.util.Timer;
  */
 public class Atendimento {
     private String Paciente;
+    private String NomeMedico;
     private String EspecialidadeMedico;
     private Date DataHoraAtendimento;
 
-    public Atendimento(String paciente, String especialidadeMedico, Date dataHoraAtendimento) {
+    public Atendimento(String paciente, String especialidadeMedico, Date dataHoraAtendimento, String nomeMedico) {
         Paciente = paciente;
         EspecialidadeMedico = especialidadeMedico;
         DataHoraAtendimento = dataHoraAtendimento;
+        NomeMedico = nomeMedico;
+    }
+
+    public String getNomeMedico() {
+        return NomeMedico;
+    }
+
+    public void setNomeMedico(String nomeMedico) {
+        NomeMedico = nomeMedico;
     }
 
     public String getEspecialidadeMedico() {

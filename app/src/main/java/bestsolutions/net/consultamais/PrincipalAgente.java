@@ -14,13 +14,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
+import bestsolutions.net.consultamais.database.DB;
+import bestsolutions.net.consultamais.entidades.Atendimento;
 import butterknife.Bind;
 
 public class PrincipalAgente extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-
-    @Bind(R.id.listConsultas)
-    protected ListView mListConsultas;
+        implements NavigationView.OnNavigationItemSelectedListener, ListagemConsultas.OnConsultaClicked {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,15 +29,6 @@ public class PrincipalAgente extends AppCompatActivity
         setContentView(R.layout.activity_principal_agente);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Criar método de Adição da Consulta", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -46,7 +38,6 @@ public class PrincipalAgente extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
     }
 
     @Override
@@ -89,11 +80,44 @@ public class PrincipalAgente extends AppCompatActivity
         if (id == R.id.nav_Paciente) {
             // Handle the camera action
         } else if (id == R.id.nav_sair) {
-
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void OnConsultaClicked(ArrayList<Atendimento> atendimentos) {
+
+        ListagemConsultas listagemConsultas = (ListagemConsultas)
+                getSupportFragmentManager().findFragmentById(R.id.fragmentListagemConsulta);
+        listagemConsultas.AtualizaListagem();
+
+        /*if (listagemConsultas != null) {
+            // If article frag is available, we're in two-pane layout...
+
+            // Call a method in the ArticleFragment to update its content
+            listagemConsultas.updateArticleView(position);
+        } else {
+            // Otherwise, we're in the one-pane layout and must swap frags...
+
+            // Create fragment and give it an argument for the selected article
+            ArticleFragment newFragment = new ArticleFragment();
+            Bundle args = new Bundle();
+            args.putInt(ArticleFragment.ARG_POSITION, position);
+            newFragment.setArguments(args);
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            // Replace whatever is in the fragment_container view with this fragment,
+            // and add the transaction to the back stack so the user can navigate back
+            transaction.replace(R.id.fragment_container, newFragment);
+            transaction.addToBackStack(null);
+
+            // Commit the transaction
+            transaction.commit();
+        }*/
     }
 }
