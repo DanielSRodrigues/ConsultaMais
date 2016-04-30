@@ -36,6 +36,8 @@ public class ListagemConsultas extends Fragment {
     private OnConsultaClicked mListener;
     @Bind(R.id.listConsultas)
     public RecyclerView mListagemConsulta;
+    @Bind(R.id.qtdItens)
+    public TextView mQtdIntes;
     @Bind(R.id.swipe)
     public SwipeRefreshLayout mSwipe;
     public AtendimentosRecycleAdapter mAdapter;
@@ -78,7 +80,7 @@ public class ListagemConsultas extends Fragment {
                 AtualizaListagem();
             }
         });
-/*Snackbar.make(view, "Criar método de Adição da Consulta", Snackbar.LENGTH_LONG)
+            /*Snackbar.make(view, "Criar método de Adição da Consulta", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +90,6 @@ public class ListagemConsultas extends Fragment {
                 startActivity(i);
             }
         });
-
 
         return view;
     }
@@ -116,6 +117,7 @@ public class ListagemConsultas extends Fragment {
         mAtendimentos.clear();
         mAtendimentos.addAll(DB.Atendimentos);
         mAdapter.notifyDataSetChanged();
+        mQtdIntes.setText(""+mAtendimentos.size());
         mSwipe.setRefreshing(false);
     }
 
@@ -201,7 +203,6 @@ public class ListagemConsultas extends Fragment {
         @Bind(R.id.lblEspecialidade)
         public TextView Especialidade;
 
-
         public ConsultaViewHolderAdapter(View view) {
             super(view);
             ButterKnife.bind(this, view);
@@ -229,6 +230,7 @@ public class ListagemConsultas extends Fragment {
             DataAtendimento.setText(reportDate);
             Paciente.setText(atendimento.getPaciente());
             Especialidade.setText(atendimento.getEspecialidadeMedico());
+
         }
 
     }
