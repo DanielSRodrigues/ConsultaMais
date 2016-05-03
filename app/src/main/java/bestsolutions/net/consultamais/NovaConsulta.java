@@ -58,12 +58,31 @@ public class NovaConsulta extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+       /* View view = inflater.inflate(R.layout.fragment_nova_consulta, container, false);
         // Inflate the layout for this fragment
+
+        Spinner spinner1 = (Spinner) view.findViewById(R.id.especialidadesSpinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getContext(),
+                R.array.especialidadesSpinner, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner1.setAdapter(adapter1);
+
+        Spinner spinner2 = (Spinner) view.findViewById(R.id.listaPacientes);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getContext(),
+                R.array.listaPacientes, android.R.layout.simple_spinner_item);
+        spinner2.setAdapter(adapter2);*/
+        //return view;
         return inflater.inflate(R.layout.fragment_nova_consulta, container, false);
     }
 
@@ -105,4 +124,5 @@ public class NovaConsulta extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 }

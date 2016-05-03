@@ -8,4 +8,9 @@
     <string name="action_settings">Configurações</string>
     <string name="title_activity_principal_agente">Agente</string>
     <string name="sing_in">Entrar</string>
+    <string name="consult_date">Data Consulta</string>
+    <string-array name="especialidades_array" />
+    <string name="SelectSelectEspeciality">Selecionar especialidade</string>
+    <string name="SelectPatience">Selecionar paciente</string>
+    <string name="SelectDate">Selecione a data:</string>
 </resources>
