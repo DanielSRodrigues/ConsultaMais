@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="bestsolutions.net.consultamais.NovaConsulta">
+    tools:context="bestsolutions.net.consultamais.NovaConsulta"
+    android:weightSum="1">
 
     <android.support.v7.widget.AppCompatSpinner
 
@@ -27,7 +28,25 @@
 <!--        android:prompt="@string/SelectSpeciality">-->
         </android.support.v7.widget.AppCompatSpinner>
 
-   <CalendarView android:layout_width="180dp"  android:layout_height="190dp">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:text="Hora da Consulta" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Escolha a data da consulta:"
+        android:id="@+id/textView2"
+        android:layout_weight="0.20" />
+
+    <CalendarView android:layout_width="180dp"  android:layout_height="190dp"
+
+       android:layout_gravity="right">
            android:id="@+id/calendarView1"
            android:layout_width="match_parent"
            android:layout_height="match_parent"
@@ -35,6 +54,15 @@
            android:layout_marginTop="20dp"
            android:showWeekNumber="false"/>
    </CalendarView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salvar"
+        android:id="@+id/button"
+        android:shadowColor="@color/cardview_dark_background"
+        android:layout_gravity="right"
+        />
 
 
 </LinearLayout>

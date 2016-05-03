@@ -38,4 +38,5 @@
         <item>Jurandir</item>
         <item>Hugo</item>
     </string-array>
+    <item name="calendarView1" type="id">Calendario</item>
 </resources>
