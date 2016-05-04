@@ -30,7 +30,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".PrincipalAgente" />
         </activity>
-        <activity android:name=".CalendarioActivity" />
         <activity android:name=".captura_dados"></activity>
     </application>
 

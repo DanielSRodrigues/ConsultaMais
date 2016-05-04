@@ -30,6 +30,16 @@
         <item>Reumatologista</item>
         <item>Urologista</item>
     </string-array>
+    <string-array name="medicosSpinner">
+        <item>Selecione um Médico:</item>
+        <item>Dr. Elton</item>
+        <item>Dr. Felipe Generico</item>
+        <item>Dr. Marcia</item>
+        <item>Dr. Raissa Guerra de Magalhães</item>
+        <item>Dr. Ana Cristina de Souza Bezerra</item>
+        <item>Dr. Ivlison Souza</item>
+        <item>Dr. Nelson Glauber</item>
+    </string-array>
     <string-array name="listaPacientes">
         <item>Selecione um Paciente:</item>
         <item>Elton</item>
