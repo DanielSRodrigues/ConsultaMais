@@ -123,28 +123,6 @@ public class ListagemConsultasFragment extends Fragment {
         void OnConsultaClicked(ArrayList<Consulta> consultas);
     }
 
-    class AtendimentosTask extends AsyncTask<Void, Void, ArrayList<Consulta>> {
-
-        @Override
-        protected ArrayList<Consulta> doInBackground(Void... params) {
-            //VerificaConexao.verificaConexao(_Activity.getContext());
-            final String url = "https://3ezp6a-ch3302.files.1drv.com/y3mpELFQ0zimR7sS5jbVmkTvzeQtyRauFKWNVieAo3TscoM3FgP4SKKdyHtVC76_wp3U5QQtR9Mckk1GqDKSGqLI3fhqZ83SA7b4YCkFp4yDMrWogbEge_fglNrQb5MxyZArG6nqK9mhkzi1Ha5ACS0_g/consultas.json?download&psid=1";
-            OkHttpClient client = new OkHttpClient();
-            Request req = new Request.Builder().url(url).build();
-            try {
-                Response resp = client.newCall(req).execute();
-                String jsonString = resp.body().string();
-                Gson json = new Gson();
-
-
-            } catch (Exception ex) {
-
-            }
-
-            return null;
-        }
-    }
-
     private class AtendimentosRecycleAdapter extends RecyclerView.Adapter<ConsultaViewHolderAdapter> {
 
         private ArrayList<Consulta> mValues;
