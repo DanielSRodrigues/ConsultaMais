@@ -13,23 +13,21 @@ public class DBConnector extends SQLiteOpenHelper {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
-
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + MovieDB.TABLE_NAME + "(" +
-                MovieDB.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                MovieDB.COLUMN_CAMINHOPOSTER + " TEXT, " +
-                MovieDB.COLUMN_CAMINHOBACKPOSTER + " TEXT, " +
-                MovieDB.COLUMN_OVERVIEW + " TEXT NOT NULL, " +
-                MovieDB.COLUMN_RELEASEDATE + " TEXT, " +
-                MovieDB.COLUMN_ORIGINALTITLE + " TEXT, " +
-                MovieDB.COLUMN_TITLE + " TEXT NOT NULL, " +
-                MovieDB.COLUMN_POPULARITY + " REAL, " +
-                MovieDB.COLUMN_QTDVOTES + " INT, " +
-                MovieDB.COLUMN_ASSISTIDO + " INT, " +
-                MovieDB.COLUMN_BYTEPOST + " BLOB, " +
-                MovieDB.COLUMN_BYTEBACKPOST + " BLOB, " +
-                MovieDB.COLUMN_AVERAGEVOTE + " REAL)");
+        db.execSQL("CREATE TABLE " + PacienteDB.TABLE_NAME + "(" +
+                PacienteDB.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                PacienteDB.COLUMN_NOME + " TEXT NOT NULL, " +
+                PacienteDB.COLUMN_SEXO + " INT, " +
+                PacienteDB.COLUMN_TELEFONE + " TEXT, " +
+                PacienteDB.COLUMN_CELULAR + " TEXT, " +
+                PacienteDB.COLUMN_RUA + " TEXT, " +
+                PacienteDB.COLUMN_NUMERO + " TEXT, " +
+                PacienteDB.COLUMN_COMPLEMENTO + " TEXT, " +
+                PacienteDB.COLUMN_CEP + " TEXT, " +
+                PacienteDB.COLUMN_BAIRRO + " TEXT, " +
+                PacienteDB.COLUMN_CIDADE + " TEXT, " +
+                PacienteDB.COLUMN_ESTADO + " TEXT )");
     }
 
     @Override

@@ -1,16 +1,11 @@
 package bestsolutions.net.consultamais.entidades;
 
-/**
- * Created by Daniel Rodrigues on 30/05/2016.
- */
 public class Paciente {
-    public enum Sexo {
-        Masculino,
-        Feminino
-    }
 
+
+    private int Id;
     private String mNome;
-    private Sexo mSexo;
+    private int mSexo;
 
     private String mTelefone;
     private String mCelular;
@@ -24,20 +19,28 @@ public class Paciente {
     private String mEstado;
 
 
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
+    public int getSexo() {
+        return mSexo;
+    }
+
+    public void setSexo(int sexo) {
+        mSexo = sexo;
+    }
+
     public String getNome() {
         return mNome;
     }
 
     public void setNome(String nome) {
         mNome = nome;
-    }
-
-    public Sexo getSexo() {
-        return mSexo;
-    }
-
-    public void setSexo(Sexo sexo) {
-        mSexo = sexo;
     }
 
     public String getTelefone() {
