@@ -13,4 +13,5 @@
     <string name="SelectSelectEspeciality">Selecionar especialidade</string>
     <string name="SelectPatience">Selecionar paciente</string>
     <string name="SelectDate">Selecione a data:</string>
+    <string name="consultas">Consultas</string>
 </resources>

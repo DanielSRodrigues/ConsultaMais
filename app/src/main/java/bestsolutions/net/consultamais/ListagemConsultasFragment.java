@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -23,7 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import bestsolutions.net.consultamais.database.DB;
-import bestsolutions.net.consultamais.entidades.Atendimento;
+import bestsolutions.net.consultamais.entidades.Consulta;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import okhttp3.OkHttpClient;
@@ -31,7 +30,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 
-public class ListagemConsultas extends Fragment {
+public class ListagemConsultasFragment extends Fragment {
 
     private OnConsultaClicked mListener;
     @Bind(R.id.listConsultas)
@@ -42,14 +41,14 @@ public class ListagemConsultas extends Fragment {
     public SwipeRefreshLayout mSwipe;
     public AtendimentosRecycleAdapter mAdapter;
 
-    public ArrayList<Atendimento> mAtendimentos = new ArrayList<>();
+    public ArrayList<Consulta> mConsultas = new ArrayList<>();
 
-    public ListagemConsultas() {
+    public ListagemConsultasFragment() {
         // Required empty public constructor
     }
 
-    public static ListagemConsultas newInstance() {
-        ListagemConsultas fragment = new ListagemConsultas();
+    public static ListagemConsultasFragment newInstance() {
+        ListagemConsultasFragment fragment = new ListagemConsultasFragment();
         return fragment;
     }
 
@@ -65,23 +64,12 @@ public class ListagemConsultas extends Fragment {
         View view = inflater.inflate(R.layout.fragment_listagem_consultas, container, false);
         ButterKnife.bind(this, view);
 
-        /*AtendimentosTask task = new AtendimentosTask();
-        task.execute();*/
-
         mListagemConsulta.setLayoutManager(new LinearLayoutManager(getActivity()));
         mListagemConsulta.setItemAnimator(new DefaultItemAnimator());
-        mAdapter = new AtendimentosRecycleAdapter(getActivity(), mAtendimentos);
+        mAdapter = new AtendimentosRecycleAdapter(getActivity(), mConsultas);
         mListagemConsulta.setAdapter(mAdapter);
         AtualizaListagem();
 
-        mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                AtualizaListagem();
-            }
-        });
-            /*Snackbar.make(view, "Criar método de Adição da Consulta", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,13 +81,6 @@ public class ListagemConsultas extends Fragment {
 
         return view;
     }
-
-   /* // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.OnAtualizaListagem(uri);
-        }
-    }*/
 
     @Override
     public void onAttach(Context context) {
@@ -114,10 +95,10 @@ public class ListagemConsultas extends Fragment {
 
     public void AtualizaListagem() {
         mSwipe.setRefreshing(true);
-        mAtendimentos.clear();
-        mAtendimentos.addAll(DB.Atendimentos);
+        mConsultas.clear();
+        mConsultas.addAll(DB.consultas);
         mAdapter.notifyDataSetChanged();
-        mQtdIntes.setText(""+mAtendimentos.size());
+        mQtdIntes.setText("" + mConsultas.size());
         mSwipe.setRefreshing(false);
     }
 
@@ -132,22 +113,22 @@ public class ListagemConsultas extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p/>
+     * <p>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnConsultaClicked {
         // TODO: Update argument type and name
-        void OnConsultaClicked(ArrayList<Atendimento> atendimentos);
+        void OnConsultaClicked(ArrayList<Consulta> consultas);
     }
 
-    class AtendimentosTask extends AsyncTask<Void, Void, ArrayList<Atendimento>> {
+    class AtendimentosTask extends AsyncTask<Void, Void, ArrayList<Consulta>> {
 
         @Override
-        protected ArrayList<Atendimento> doInBackground(Void... params) {
+        protected ArrayList<Consulta> doInBackground(Void... params) {
             //VerificaConexao.verificaConexao(_Activity.getContext());
-            final String url = "https://3ezp6a-ch3302.files.1drv.com/y3mpELFQ0zimR7sS5jbVmkTvzeQtyRauFKWNVieAo3TscoM3FgP4SKKdyHtVC76_wp3U5QQtR9Mckk1GqDKSGqLI3fhqZ83SA7b4YCkFp4yDMrWogbEge_fglNrQb5MxyZArG6nqK9mhkzi1Ha5ACS0_g/Atendimentos.json?download&psid=1";
+            final String url = "https://3ezp6a-ch3302.files.1drv.com/y3mpELFQ0zimR7sS5jbVmkTvzeQtyRauFKWNVieAo3TscoM3FgP4SKKdyHtVC76_wp3U5QQtR9Mckk1GqDKSGqLI3fhqZ83SA7b4YCkFp4yDMrWogbEge_fglNrQb5MxyZArG6nqK9mhkzi1Ha5ACS0_g/consultas.json?download&psid=1";
             OkHttpClient client = new OkHttpClient();
             Request req = new Request.Builder().url(url).build();
             try {
@@ -166,9 +147,9 @@ public class ListagemConsultas extends Fragment {
 
     private class AtendimentosRecycleAdapter extends RecyclerView.Adapter<ConsultaViewHolderAdapter> {
 
-        private ArrayList<Atendimento> mValues;
+        private ArrayList<Consulta> mValues;
 
-        public AtendimentosRecycleAdapter(Context context, ArrayList<Atendimento> items) {
+        public AtendimentosRecycleAdapter(Context context, ArrayList<Consulta> items) {
             mValues = items;
         }
 
@@ -178,7 +159,7 @@ public class ListagemConsultas extends Fragment {
             return new ConsultaViewHolderAdapter(view);
         }
 
-        public Atendimento getValueAt(int position) {
+        public Consulta getValueAt(int position) {
             return mValues.get(position);
         }
 
@@ -216,20 +197,16 @@ public class ListagemConsultas extends Fragment {
             v.getContext().startActivity(i);*/
         }
 
-        public void bindOS(Atendimento atendimento) {
+        public void bindOS(Consulta consulta) {
             DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
             DateFormat dh = new SimpleDateFormat("HH:mm");
 
-            // Get the date today using Calendar object.
-
-            // Using DateFormat format method we can create a string
-            // representation of a date with the defined format.
-            String reportDate = df.format(atendimento.getDataHoraAtendimento());
-            String hora = dh.format(atendimento.getDataHoraAtendimento());
+            String reportDate = df.format(consulta.getDataHoraAtendimento());
+            String hora = dh.format(consulta.getDataHoraAtendimento());
             HoraAtendimento.setText(hora);
             DataAtendimento.setText(reportDate);
-            Paciente.setText(atendimento.getPaciente());
-            Especialidade.setText(atendimento.getEspecialidadeMedico());
+            Paciente.setText(consulta.getPaciente());
+            Especialidade.setText(consulta.getEspecialidadeMedico());
 
         }
 

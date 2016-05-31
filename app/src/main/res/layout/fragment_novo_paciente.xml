@@ -1,0 +1,23 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="bestsolutions.net.consultamais.NovoPacienteFragment">
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/white">
+
+        <EditText
+            android:id="@+id/NomeCompleto"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="4dp"
+            android:backgroundTint="@color/white"
+            android:hint="@string/login"
+            android:textColor="@color/white"/>
+    </android.support.design.widget.TextInputLayout>
+
+</FrameLayout>

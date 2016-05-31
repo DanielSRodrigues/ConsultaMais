@@ -7,13 +7,13 @@ import java.util.Timer;
 /**
  * Created by Daniel Rodrigues on 06/04/2016.
  */
-public class Atendimento {
+public class Consulta {
     private String Paciente;
     private String NomeMedico;
     private String EspecialidadeMedico;
     private Date DataHoraAtendimento;
 
-    public Atendimento(String paciente, String especialidadeMedico, Date dataHoraAtendimento, String nomeMedico) {
+    public Consulta(String paciente, String especialidadeMedico, Date dataHoraAtendimento, String nomeMedico) {
         Paciente = paciente;
         EspecialidadeMedico = especialidadeMedico;
         DataHoraAtendimento = dataHoraAtendimento;

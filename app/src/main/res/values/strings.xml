@@ -19,9 +19,9 @@
     <string name="SelectSpeciality">Select speciality:</string>
     <string name="SelectPatience">Select patience:</string>
     <string name="SelectDate">Select date:</string>
+    <string name="consultas">Consult</string>
 
     <string-array name="especialidadesSpinner">
-        <item>Selecione uma Especialidade:</item>
         <item>Clínico Geral</item>
         <item>Cardiologista</item>
         <item>Infectologista</item>
@@ -41,7 +41,6 @@
         <item>Dr. Nelson Glauber</item>
     </string-array>
     <string-array name="listaPacientes">
-        <item>Selecione um Paciente:</item>
         <item>Elton</item>
         <item>Márcia</item>
         <item>Ramide</item>

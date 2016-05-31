@@ -1,8 +1,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ListagemConsultasFragment">
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".ListagemPacientesFragment">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,8 +16,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Consultas"
-                android:textSize="18dp" />
+                android:text="@string/patients"
+                android:textSize="18dp"/>
 
             <TextView
                 android:id="@+id/qtdItens"
@@ -26,14 +26,14 @@
                 android:layout_weight="1"
                 android:gravity="end"
                 android:text=""
-                android:textSize="18dp" />
+                android:textSize="18dp"/>
         </LinearLayout>
 
         <View
             android:layout_width="1000dp"
             android:layout_height="2dp"
             android:layout_gravity="center_horizontal"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/colorPrimaryDark"/>
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipe"
@@ -43,7 +43,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/listConsultas"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"/>
         </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
 
@@ -53,7 +53,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_add" />
-
+        android:src="@drawable/ic_add"/>
 
 </FrameLayout>

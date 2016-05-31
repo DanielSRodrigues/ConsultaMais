@@ -3,7 +3,7 @@ package bestsolutions.net.consultamais.database;
 import java.util.ArrayList;
 import java.util.Date;
 
-import bestsolutions.net.consultamais.entidades.Atendimento;
+import bestsolutions.net.consultamais.entidades.Consulta;
 import bestsolutions.net.consultamais.entidades.Especialidade;
 import bestsolutions.net.consultamais.entidades.Usuario;
 
@@ -23,16 +23,16 @@ public class DB {
         add(new Especialidade("Ortopedista"));
     }};
 
-    static public ArrayList<Atendimento> Atendimentos = new ArrayList<Atendimento>() {{
+    static public ArrayList<Consulta> consultas = new ArrayList<Consulta>() {{
         // String paciente, String especialidadeMedico, Date dataHoraAtendimento
-        add(new Atendimento("Felipe Generico", "Clinico Geral", new Date(), "Daniel Magalhães"));
-        add(new Atendimento("Elton", "Pediatra", new Date(), "Daniel Magalhães"));
-        add(new Atendimento("Marcia", "Pediatra", new Date(), "Daniel Magalhães"));
-        add(new Atendimento("Jurandir Araujo Santos", "Pediatra", new Date(), "Daniel Magalhães"));
-        add(new Atendimento("Raissa Guerra de Magalhães Melo", "Ortopedista", new Date(), "Daniel Magalhães"));
-        add(new Atendimento("Ana Cristina de Souza Bezerra", "Pediatra", new Date(), "Daniel Magalhães"));
-        add(new Atendimento("Ivlison Souza", "Pediatra", new Date(), "Daniel Magalhães"));
-        add(new Atendimento("Nelson Glauber", "Pediatra", new Date(), "Daniel Magalhães"));
+        add(new Consulta("Felipe Generico", "Clinico Geral", new Date(), "Daniel Magalhães"));
+        add(new Consulta("Elton", "Pediatra", new Date(), "Daniel Magalhães"));
+        add(new Consulta("Marcia", "Pediatra", new Date(), "Daniel Magalhães"));
+        add(new Consulta("Jurandir Araujo Santos", "Pediatra", new Date(), "Daniel Magalhães"));
+        add(new Consulta("Raissa Guerra de Magalhães Melo", "Ortopedista", new Date(), "Daniel Magalhães"));
+        add(new Consulta("Ana Cristina de Souza Bezerra", "Pediatra", new Date(), "Daniel Magalhães"));
+        add(new Consulta("Ivlison Souza", "Pediatra", new Date(), "Daniel Magalhães"));
+        add(new Consulta("Nelson Glauber", "Pediatra", new Date(), "Daniel Magalhães"));
 
     }};
 }

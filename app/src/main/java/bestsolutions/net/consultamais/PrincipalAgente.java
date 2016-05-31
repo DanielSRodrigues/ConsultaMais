@@ -1,9 +1,7 @@
 package bestsolutions.net.consultamais;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,21 +10,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import bestsolutions.net.consultamais.database.DB;
-import bestsolutions.net.consultamais.entidades.Atendimento;
-import butterknife.Bind;
+import bestsolutions.net.consultamais.entidades.Consulta;
 
 public class PrincipalAgente extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ListagemConsultas.OnConsultaClicked {
+        implements NavigationView.OnNavigationItemSelectedListener, ListagemConsultasFragment.OnConsultaClicked {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal_agente);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -37,7 +33,10 @@ public class PrincipalAgente extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.getMenu().getItem(0).setChecked(true);
         navigationView.setNavigationItemSelectedListener(this);
+        onNavigationItemSelected(navigationView.getMenu().getItem(0));
+
     }
 
     @Override
@@ -77,8 +76,19 @@ public class PrincipalAgente extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        if (id == R.id.nav_Consulta) {
+            ListagemConsultasFragment detalheProdutoFragment = ListagemConsultasFragment.newInstance();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.content, detalheProdutoFragment, "Listagem")
+                    .commit();
+        }
         if (id == R.id.nav_Paciente) {
-            // Handle the camera action
+            ListagemPacientesFragment detalheProdutoFragment = ListagemPacientesFragment.newInstance();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.content, detalheProdutoFragment, "Listagem")
+                    .commit();
         } else if (id == R.id.nav_sair) {
             finish();
         }
@@ -89,17 +99,17 @@ public class PrincipalAgente extends AppCompatActivity
     }
 
     @Override
-    public void OnConsultaClicked(ArrayList<Atendimento> atendimentos) {
+    public void OnConsultaClicked(ArrayList<Consulta> consultas) {
 
-        ListagemConsultas listagemConsultas = (ListagemConsultas)
+        ListagemConsultasFragment listagemConsultasFragment = (ListagemConsultasFragment)
                 getSupportFragmentManager().findFragmentById(R.id.fragmentListagemConsulta);
-        listagemConsultas.AtualizaListagem();
+        listagemConsultasFragment.AtualizaListagem();
 
-        /*if (listagemConsultas != null) {
+        /*if (listagemConsultasFragment != null) {
             // If article frag is available, we're in two-pane layout...
 
             // Call a method in the ArticleFragment to update its content
-            listagemConsultas.updateArticleView(position);
+            listagemConsultasFragment.updateArticleView(position);
         } else {
             // Otherwise, we're in the one-pane layout and must swap frags...
 
