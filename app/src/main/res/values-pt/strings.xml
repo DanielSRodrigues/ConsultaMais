@@ -14,4 +14,14 @@
     <string name="SelectPatience">Selecionar paciente</string>
     <string name="SelectDate">Selecione a data:</string>
     <string name="consultas">Consultas</string>
+    <string name="Name">Nome Completo</string>
+    <string name="Sexo">Sexo</string>
+    <string name="Telefone">Telefone</string>
+    <string name="Celular">Celular</string>
+    <string name="Rua">Rua</string>
+    <string name="Numero">Numero</string>
+    <string name="Bairro">Bairro</string>
+    <string name="Cidade">Cidade</string>
+    <string name="Estado">Estado</string>
+    <string name="Complemento">Complemento</string>
 </resources>

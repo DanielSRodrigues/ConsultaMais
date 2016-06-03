@@ -20,7 +20,7 @@
     </FrameLayout>
 
 
-    <!--    <fragment
+    <!--  <fragment
             android:id="@+id/fragmentListagemConsulta"
             android:name="bestsolutions.net.consultamais.ListagemConsultasFragment"
             android:layout_width="match_parent"

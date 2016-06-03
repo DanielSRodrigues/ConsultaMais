@@ -3,4 +3,23 @@
     <string name="app_name">Consulta Mais</string>
     <string name="patients">Patients</string>
     <string name="logout">Logout</string>
+    <string name="action_settings">Configurations</string>
+    <string name="title_activity_principal_agente">Agent</string>
+    <string name="sing_in">Enter</string>
+    <string name="consult_date">Consult Date</string>
+    <string-array name="especialidades_array" />
+    <string name="SelectSelectEspeciality">Selecionar especialidade</string>
+    <string name="SelectPatience">Selecionar paciente</string>
+    <string name="SelectDate">Selecione a data:</string>
+    <string name="consultas">Consultas</string>
+    <string name="Name">Nome Completo</string>
+    <string name="Sexo">Sexo</string>
+    <string name="Telefone">Telefone</string>
+    <string name="Celular">Celular</string>
+    <string name="Rua">Rua</string>
+    <string name="Numero">Numero</string>
+    <string name="Bairro">Bairro</string>
+    <string name="Cidade">Cidade</string>
+    <string name="Estado">Estado</string>
+    <string name="Complemento">Complemento</string>
 </resources>

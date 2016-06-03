@@ -20,29 +20,29 @@ import butterknife.OnClick;
 public class NovoPacienteFragment extends Fragment {
 
     @Bind(R.id.NomeCompleto)
-    private TextView mNome;
+     TextView mNome;
     /* @Bind(R.id.Sexo)
      private TextView mSexo;*/
     @Bind(R.id.Telefone)
-    private TextView mTelefone;
+    TextView mTelefone;
     @Bind(R.id.Celular)
-    private TextView mCelular;
+     TextView mCelular;
     @Bind(R.id.Rua)
-    private TextView mRua;
+     TextView mRua;
     @Bind(R.id.Numero)
-    private TextView mNumero;
+     TextView mNumero;
     @Bind(R.id.Complemento)
-    private TextView mComplemento;
+    TextView mComplemento;
     @Bind(R.id.Cep)
-    private TextView mCep;
+     TextView mCep;
     @Bind(R.id.Bairro)
-    private TextView mBairro;
+     TextView mBairro;
     @Bind(R.id.Cidade)
-    private TextView mCidade;
+     TextView mCidade;
     @Bind(R.id.Estado)
-    private TextView mEstado;
+     TextView mEstado;
 
-    private Button mSalvar;
+     Button mSalvar;
 
 
     public NovoPacienteFragment() {

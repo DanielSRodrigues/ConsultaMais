@@ -5,4 +5,10 @@
     <string name="login">Login</string>
     <string name="patients">Patients</string>
     <string name="logout">Logout</string>
+    <string name="Celular">Celular</string>
+    <string name="Rua">Rua</string>
+    <string name="Numero">Numero</string>
+    <string name="Bairro">Bairro</string>
+    <string name="Cidade">Cidade</string>
+    <string name="Estado">Estado</string>
 </resources>

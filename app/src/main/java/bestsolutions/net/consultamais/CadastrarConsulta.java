@@ -4,25 +4,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.widget.TextView;
-import android.app.Activity;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.FragmentTransaction;
-import android.app.TimePickerDialog;
-import android.app.TimePickerDialog.OnTimeSetListener;
-import android.widget.DatePicker;
-import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.Toast;
 
 import java.text.CollationElementIterator;
-import java.util.Calendar;
-
-import android.text.format.DateFormat;
-import android.view.View;
-
 import java.util.Calendar;
 
 public class CadastrarConsulta extends AppCompatActivity {
@@ -62,10 +46,11 @@ public class CadastrarConsulta extends AppCompatActivity {
 
         AtualizarData();
         AtualizarHora();
+    }
 
     private void AtualizarData() {
         CollationElementIterator txtData = null;
-        txtData.setText(String.valueOf(new StringBuilder().append(Dia).append("/").append(Mes + 1).append("/").append(Ano).append(" ")));
+        //txtData.setText(String.valueOf(new StringBuilder().append(Dia).append("/").append(Mes + 1).append("/").append(Ano).append(" ")));
     }
 
     private void AtualizarHora() {
@@ -75,22 +60,22 @@ public class CadastrarConsulta extends AppCompatActivity {
 
 
     public void InicializaListeners() {
-        TextView txtData = (TextView) findViewById(R.id.txtData);
-        TextView txtHora = (TextView) findViewById(R.id.txtHora);
+       /* TextView txtData = (TextView) findViewById(R.id.txt/Data);
+        TextView txtHora = (TextView) findViewById(R.id.txtHora);*/
     }
 
-    public Dialog onCreateDialog(Bundle savedInstanceState)
-    {
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         final Calendar c = Calendar.getInstance();
         Hora = c.get(Calendar.HOUR_OF_DAY);
         Minuto = c.get(Calendar.MINUTE);
-        return new TimePickerDialog(
+        return null;
+        /*return new TimePickerDialog(
                 getApplication(),
                 this,
                 Hora,
                 Minuto,
-                DateFormat.is24HourFormat(getApplication());
+                DateFormat.is24HourFormat(getApplication());*/
     }
         /*Toolbar actionbar = (Toolbar) findViewById(R.id.actionbar);
         if (null != actionbar) {
@@ -110,4 +95,3 @@ public class CadastrarConsulta extends AppCompatActivity {
 */
 }
 
-}
