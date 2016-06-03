@@ -24,4 +24,5 @@
     <string name="Cidade">Cidade</string>
     <string name="Estado">Estado</string>
     <string name="Complemento">Complemento</string>
+    <string name="cep">Cep</string>
 </resources>

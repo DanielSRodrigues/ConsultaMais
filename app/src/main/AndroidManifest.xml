@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="bestsolutions.net.consultamais">
+          package="bestsolutions.net.consultamais">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -14,23 +14,26 @@
             android:name=".Login"
             android:theme="@style/AppThemeNoToolbar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
             android:name=".PrincipalAgente"
             android:label="@string/title_activity_principal_agente"
-            android:theme="@style/AppThemeNoToolbar.NoActionBar" />
+            android:theme="@style/AppThemeNoToolbar.NoActionBar"/>
         <activity
             android:name=".CadastrarConsulta"
             android:label="@string/title_activity_principal_agente">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".PrincipalAgente" />
+                android:value=".PrincipalAgente"/>
         </activity>
-        <activity android:name=".captura_dados"></activity>
+        <activity
+            android:name=".CrudPacienteActivity"
+            android:label="@string/title_activity_principal_agente">
+        </activity>
     </application>
 
 </manifest>

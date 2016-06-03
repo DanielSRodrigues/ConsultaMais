@@ -1,7 +1,9 @@
 package bestsolutions.net.consultamais.entidades;
 
-public class Paciente {
+import org.parceler.Parcel;
 
+@Parcel
+public class Paciente {
 
     private int Id;
     private String mNome;

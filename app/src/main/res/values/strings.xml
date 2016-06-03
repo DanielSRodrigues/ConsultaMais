@@ -20,6 +20,7 @@
     <string name="SelectPatience">Select patience:</string>
     <string name="SelectDate">Select date:</string>
     <string name="consultas">Consult</string>
+    <string name="cep">Cep</string>
 
     <string-array name="especialidadesSpinner">
         <item>Clínico Geral</item>

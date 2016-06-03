@@ -37,8 +37,6 @@ public class ListagemConsultasFragment extends Fragment {
     public RecyclerView mListagemConsulta;
     @Bind(R.id.qtdItens)
     public TextView mQtdIntes;
-    @Bind(R.id.swipe)
-    public SwipeRefreshLayout mSwipe;
     public AtendimentosRecycleAdapter mAdapter;
 
     public ArrayList<Consulta> mConsultas = new ArrayList<>();
@@ -94,12 +92,10 @@ public class ListagemConsultasFragment extends Fragment {
     }
 
     public void AtualizaListagem() {
-        mSwipe.setRefreshing(true);
         mConsultas.clear();
         mConsultas.addAll(DB.consultas);
         mAdapter.notifyDataSetChanged();
         mQtdIntes.setText("" + mConsultas.size());
-        mSwipe.setRefreshing(false);
     }
 
     @Override

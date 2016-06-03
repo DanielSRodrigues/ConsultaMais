@@ -1,8 +1,11 @@
 package bestsolutions.net.consultamais;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -12,6 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import org.parceler.Parcels;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -27,9 +32,13 @@ import butterknife.ButterKnife;
 
 public class ListagemPacientesFragment extends Fragment {
 
+    public final int ADD_NEW_PATIENT = 340;
     public RecyclerView mListagem;
     public PacientesRecycleAdapter mAdapter;
     public ArrayList<Paciente> mPacientes;
+    public FloatingActionButton mAddPaciente;
+    @Bind(R.id.qtdItens)
+    public TextView mQtdIntes;
 
     public ListagemPacientesFragment() {
     }
@@ -48,7 +57,8 @@ public class ListagemPacientesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_listagem_pacientes, container, false);
-
+        ButterKnife.bind(this, view);
+        mListagem = (RecyclerView) view.findViewById(R.id.listaPacientes);
         mListagem.setLayoutManager(new LinearLayoutManager(getActivity()));
         mListagem.setItemAnimator(new DefaultItemAnimator());
         PacienteDB db = new PacienteDB(getActivity());
@@ -56,7 +66,29 @@ public class ListagemPacientesFragment extends Fragment {
         mAdapter = new PacientesRecycleAdapter(getActivity(), mPacientes);
         mListagem.setAdapter(mAdapter);
         AtualizaListagem();
+
+        mAddPaciente = (FloatingActionButton) view.findViewById(R.id.addPaciente);
+        mAddPaciente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), CrudPacienteActivity.class);
+                startActivityForResult(i, ADD_NEW_PATIENT);
+            }
+        });
+
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == ADD_NEW_PATIENT) {
+            if (resultCode == Activity.RESULT_OK) {
+                Paciente p = Parcels.unwrap(data.getParcelableExtra("Paciente"));
+                PacienteDB db = new PacienteDB(getActivity());
+                db.Inserir(p);
+                AtualizaListagem();
+            }
+        }
     }
 
     public void AtualizaListagem() {
@@ -64,6 +96,7 @@ public class ListagemPacientesFragment extends Fragment {
         PacienteDB db = new PacienteDB(getActivity());
         mPacientes.addAll(db.Listagem());
         mAdapter.notifyDataSetChanged();
+        mQtdIntes.setText("" + mPacientes.size());
     }
 
     private class PacientesRecycleAdapter extends RecyclerView.Adapter<PacientesViewHolderAdapter> {

@@ -1,14 +1,19 @@
 package bestsolutions.net.consultamais;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import org.parceler.Parcels;
 
 import bestsolutions.net.consultamais.database.PacienteDB;
 import bestsolutions.net.consultamais.entidades.Paciente;
@@ -20,29 +25,29 @@ import butterknife.OnClick;
 public class NovoPacienteFragment extends Fragment {
 
     @Bind(R.id.NomeCompleto)
-     TextView mNome;
+    TextView mNome;
     /* @Bind(R.id.Sexo)
      private TextView mSexo;*/
     @Bind(R.id.Telefone)
     TextView mTelefone;
     @Bind(R.id.Celular)
-     TextView mCelular;
+    TextView mCelular;
     @Bind(R.id.Rua)
-     TextView mRua;
+    TextView mRua;
     @Bind(R.id.Numero)
-     TextView mNumero;
+    TextView mNumero;
     @Bind(R.id.Complemento)
     TextView mComplemento;
     @Bind(R.id.Cep)
-     TextView mCep;
+    TextView mCep;
     @Bind(R.id.Bairro)
-     TextView mBairro;
+    TextView mBairro;
     @Bind(R.id.Cidade)
-     TextView mCidade;
+    TextView mCidade;
     @Bind(R.id.Estado)
-     TextView mEstado;
+    TextView mEstado;
 
-     Button mSalvar;
+    Button mSalvar;
 
 
     public NovoPacienteFragment() {
@@ -81,8 +86,12 @@ public class NovoPacienteFragment extends Fragment {
         p.setBairro(mBairro.getText().toString());
         p.setEstado(mEstado.getText().toString());
 
-        PacienteDB db = new PacienteDB(getActivity());
-        db.Inserir(p);
+
+        Intent returnIntent = new Intent();
+        Parcelable parcelable = Parcels.wrap(p);
+        returnIntent.putExtra("Paciente", parcelable);
+
+        getActivity().setResult(Activity.RESULT_OK, returnIntent);
         getActivity().finish();
     }
 }
