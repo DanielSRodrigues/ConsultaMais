@@ -21,6 +21,9 @@
     <string name="SelectDate">Select date:</string>
     <string name="consultas">Consult</string>
     <string name="cep">Cep</string>
+    <string name="medico">Médico</string>
+    <string name="Especialidade">Especialidade</string>
+    <string name="medicos">Médicos</string>
 
     <string-array name="especialidadesSpinner">
         <item>Clínico Geral</item>

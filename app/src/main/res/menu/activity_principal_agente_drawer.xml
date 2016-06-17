@@ -10,6 +10,10 @@
         android:icon="@drawable/ic_person"
         android:title="@string/patients"/>
     <item
+        android:id="@+id/nav_Medico"
+        android:icon="@drawable/ic_person"
+        android:title="@string/medico"/>
+    <item
         android:id="@+id/nav_sair"
         android:icon="@drawable/ic_settings_power"
         android:title="@string/logout"/>

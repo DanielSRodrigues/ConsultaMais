@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 
 import bestsolutions.net.consultamais.entidades.Consulta;
+import layout.NovoMedico;
 
 public class PrincipalAgente extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ListagemConsultasFragment.OnConsultaClicked {
@@ -89,6 +90,14 @@ public class PrincipalAgente extends AppCompatActivity
                     .beginTransaction()
                     .replace(R.id.content, detalheProdutoFragment, "Listagem")
                     .commit();
+        }
+        if (id == R.id.nav_Medico) {
+            ListagemMedicosFragment detalheProdutoFragment = ListagemMedicosFragment.newInstance();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.content, detalheProdutoFragment, "Listagem")
+                    .commit();
+
         } else if (id == R.id.nav_sair) {
             finish();
         }

@@ -25,4 +25,7 @@
     <string name="Estado">Estado</string>
     <string name="Complemento">Complemento</string>
     <string name="cep">Cep</string>
+    <string name="medico">Médico</string>
+    <string name="Especialidade">Especialidade</string>
+
 </resources>
