@@ -1,40 +1,36 @@
 package bestsolutions.net.consultamais;
 
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import android.support.v7.widget.Toolbar;
-
-import org.parceler.Parcels;
 
 import bestsolutions.net.consultamais.entidades.AtividadesCrud;
 
-public class CrudPacienteActivity extends AppCompatActivity {
+public class CrudMedicoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crud_paciente);
+        setContentView(R.layout.activity_crud_medico);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Novo paciente");
+        toolbar.setTitle(R.string.new_doctor);
 
         Intent i = getIntent();
         if (i != null) {
-            Fragment crudPaciente;
+            Fragment crudMedico;
             if (i.getBooleanExtra(AtividadesCrud.CONTEXTO_CRUD, false)) {
-                crudPaciente = AlterarPacienteFragment.newInstance();
-                toolbar.setTitle("Alterar Paciente");
+                crudMedico = AlterarMedicoFragment.newInstance();
+                toolbar.setTitle(R.string.modify_doctor);
             } else {
-                crudPaciente = NovoPacienteFragment.newInstance();
+                crudMedico = NovoMedicoFragment.newInstance();
             }
 
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.content, crudPaciente, "Listagem")
+                    .replace(R.id.content, crudMedico, "Listagem")
                     .commit();
         }
         setSupportActionBar(toolbar);

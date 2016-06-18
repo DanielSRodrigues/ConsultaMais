@@ -8,9 +8,8 @@
                                     app:cardCornerRadius="0dp"
                                     app:cardElevation="5dp">
 
-
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbarPaciente"
+        android:id="@+id/toolbarMedico"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
@@ -26,43 +25,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/lblPaciente"
+                android:id="@+id/lblMedico"
                 style="@style/LabelDestaque"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Elton Bento"/>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/lblEspecialidade"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/lblEndereco"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Rua da Estrela, nº 100"/>
-
-                <TextView
-                    android:id="@+id/lblComplemento"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Apartamento 201"/>
-            </LinearLayout>
+                android:text="Cardiopulmonar"/>
         </LinearLayout>
+
     </LinearLayout>
 </android.support.v7.widget.CardView>

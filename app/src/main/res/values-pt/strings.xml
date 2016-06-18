@@ -19,7 +19,7 @@
     <string name="Telefone">Telefone</string>
     <string name="Celular">Celular</string>
     <string name="Rua">Rua</string>
-    <string name="Numero">Numero</string>
+    <string name="Numero">Número</string>
     <string name="Bairro">Bairro</string>
     <string name="Cidade">Cidade</string>
     <string name="Estado">Estado</string>
@@ -27,5 +27,12 @@
     <string name="cep">Cep</string>
     <string name="medico">Médico</string>
     <string name="Especialidade">Especialidade</string>
+    <string name="modify">Modify</string>
+    <string name="delete">Delete</string>
+    <string name="CPF">CPF</string>
+    <string name="Adress">Endereço</string>
+    <string name="save">Save</string>
+    <string name="new_doctor">New doctor</string>
+    <string name="modify_doctor">Modify Doctor</string>
 
 </resources>

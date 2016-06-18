@@ -3,32 +3,26 @@ package bestsolutions.net.consultamais;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import org.parceler.Parcels;
 
-import bestsolutions.net.consultamais.database.PacienteDB;
 import bestsolutions.net.consultamais.entidades.AtividadesCrud;
 import bestsolutions.net.consultamais.entidades.Paciente;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-
-public class NovoPacienteFragment extends Fragment {
+public class AlterarPacienteFragment extends Fragment {
 
     @Bind(R.id.NomeCompleto)
     TextView mNome;
-    /* @Bind(R.id.Sexo)
-     private TextView mSexo;*/
     @Bind(R.id.Telefone)
     TextView mTelefone;
     @Bind(R.id.Celular)
@@ -48,12 +42,14 @@ public class NovoPacienteFragment extends Fragment {
     @Bind(R.id.Estado)
     TextView mEstado;
 
-    public NovoPacienteFragment() {
+    private static int mIdPaciente;
+
+
+    public AlterarPacienteFragment() {
     }
 
-    public static NovoPacienteFragment newInstance() {
-        NovoPacienteFragment fragment = new NovoPacienteFragment();
-        return fragment;
+    public static AlterarPacienteFragment newInstance() {
+        return new AlterarPacienteFragment();
     }
 
     @Override
@@ -64,14 +60,32 @@ public class NovoPacienteFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_novo_paciente, container, false);
+
+        View v = inflater.inflate(R.layout.fragment_alterar_paciente, container, false);
         ButterKnife.bind(this, v);
+        Intent i = getActivity().getIntent();
+        if (i != null) {
+            Paciente p = Parcels.unwrap(i.getParcelableExtra(AtividadesCrud.OBJETO_PACIENTE));
+            mNome.setText(p.getNome());
+            mTelefone.setText(p.getTelefone());
+            mCelular.setText(p.getCelular());
+            mRua.setText(p.getRua());
+            mNumero.setText(p.getNumero());
+            mComplemento.setText(p.getComplemento());
+            mCep.setText(p.getCep());
+            mBairro.setText(p.getBairro());
+            mCidade.setText(p.getCidade());
+            mEstado.setText(p.getEstado());
+            mIdPaciente = p.getId();
+        }
+
         return v;
     }
 
     @OnClick(R.id.btnSalvar)
     public void SalvarPaciente() {
         Paciente p = new Paciente();
+        p.setId(mIdPaciente);
         p.setNome(mNome.getText().toString());
         p.setSexo(1);
         p.setCelular(mCelular.getText().toString());
@@ -91,5 +105,5 @@ public class NovoPacienteFragment extends Fragment {
         getActivity().setResult(Activity.RESULT_OK, returnIntent);
         getActivity().finish();
     }
-}
 
+}

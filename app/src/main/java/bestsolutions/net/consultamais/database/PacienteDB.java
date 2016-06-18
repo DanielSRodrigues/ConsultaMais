@@ -34,7 +34,7 @@ public class PacienteDB {
         DBConnector produtoDbHelper = new DBConnector(mContext);
         SQLiteDatabase sqLiteDatabase = produtoDbHelper.getWritableDatabase();
 
-        ContentValues contentValues = valuesFromMovies(paciente);
+        ContentValues contentValues = valuesFromClass(paciente);
 
         long id = sqLiteDatabase.insert(PacienteDB.TABLE_NAME, null, contentValues);
         sqLiteDatabase.close();
@@ -46,7 +46,7 @@ public class PacienteDB {
         DBConnector produtoDbHelper = new DBConnector(mContext);
         SQLiteDatabase sqLiteDatabase = produtoDbHelper.getWritableDatabase();
 
-        ContentValues contentValues = valuesFromMovies(paciente);
+        ContentValues contentValues = valuesFromClass(paciente);
 
         int rowsAffected = sqLiteDatabase.update(PacienteDB.TABLE_NAME, contentValues,
                 PacienteDB.COLUMN_ID + "=?",
@@ -57,12 +57,12 @@ public class PacienteDB {
         return rowsAffected;
     }
 
-    public int Delete(int idMovie) {
+    public int Delete(int idPaciente) {
         DBConnector produtoDbHelper = new DBConnector(mContext);
         SQLiteDatabase sqLiteDatabase = produtoDbHelper.getWritableDatabase();
         int rowsAffected = sqLiteDatabase.delete(PacienteDB.TABLE_NAME,
                 PacienteDB.COLUMN_ID + " = ?",
-                new String[]{String.valueOf(idMovie)});
+                new String[]{String.valueOf(idPaciente)});
         sqLiteDatabase.close();
 
         return rowsAffected;
@@ -109,7 +109,7 @@ public class PacienteDB {
         return filmes;
     }
 
-    private ContentValues valuesFromMovies(Paciente paciente) {
+    private ContentValues valuesFromClass(Paciente paciente) {
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(PacienteDB.COLUMN_NOME, paciente.getNome());

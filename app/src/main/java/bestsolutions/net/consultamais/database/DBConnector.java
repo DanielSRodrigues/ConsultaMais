@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBConnector extends SQLiteOpenHelper {
 
-    public static final int DB_VERSION = 1;
+    public static final int DB_VERSION = 2;
     public static final String DB_NAME = "consultamais_db";
 
     public DBConnector(Context context) {
@@ -28,10 +28,14 @@ public class DBConnector extends SQLiteOpenHelper {
                 PacienteDB.COLUMN_BAIRRO + " TEXT, " +
                 PacienteDB.COLUMN_CIDADE + " TEXT, " +
                 PacienteDB.COLUMN_ESTADO + " TEXT )");
+
+        db.execSQL("CREATE TABLE " + MedicoDB.TABLE_NAME + "(" +
+                MedicoDB.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                MedicoDB.COLUMN_NOME + " TEXT NOT NULL, " +
+                MedicoDB.COLUMN_ESPECIALIDADE + " TEXT NOT NULL) ");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
     }
 }

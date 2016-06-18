@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -22,28 +21,30 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
+import bestsolutions.net.consultamais.database.MedicoDB;
 import bestsolutions.net.consultamais.database.PacienteDB;
 import bestsolutions.net.consultamais.entidades.AtividadesCrud;
+import bestsolutions.net.consultamais.entidades.Medico;
 import bestsolutions.net.consultamais.entidades.Paciente;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
-public class ListagemPacientesFragment extends Fragment {
-
+public class ListagemMedicosFragment extends Fragment {
 
     public RecyclerView mListagem;
-    public PacientesRecycleAdapter mAdapter;
-    public ArrayList<Paciente> mPacientes;
-    public FloatingActionButton mAddPaciente;
+    public MedicosRecycleAdapter mAdapter;
+    public ArrayList<Medico> mMedicos;
+    public FloatingActionButton mAddMedicos;
     @Bind(R.id.qtdItens)
     public TextView mQtdIntes;
 
-    public ListagemPacientesFragment() {
+    public ListagemMedicosFragment() {
     }
 
-    public static ListagemPacientesFragment newInstance() {
-        ListagemPacientesFragment fragment = new ListagemPacientesFragment();
+    public static ListagemMedicosFragment newInstance() {
+        ListagemMedicosFragment fragment = new ListagemMedicosFragment();
         return fragment;
     }
 
@@ -55,24 +56,26 @@ public class ListagemPacientesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_listagem_pacientes, container, false);
+        View view = inflater.inflate(R.layout.fragment_listagem_medicos, container, false);
         ButterKnife.bind(this, view);
 
-        mListagem = (RecyclerView) view.findViewById(R.id.listaPacientes);
+        mListagem = (RecyclerView) view.findViewById(R.id.listaMedicos);
         mListagem.setLayoutManager(new LinearLayoutManager(getActivity()));
         mListagem.setItemAnimator(new DefaultItemAnimator());
 
-        PacienteDB db = new PacienteDB(getActivity());
-        mPacientes = db.Listagem();
-        mAdapter = new PacientesRecycleAdapter(getActivity(), mPacientes);
+        MedicoDB db = new MedicoDB(getActivity());
+        mMedicos = db.Listagem();
+
+        mAdapter = new MedicosRecycleAdapter(getActivity(), mMedicos);
         mListagem.setAdapter(mAdapter);
         AtualizaListagem();
 
-        mAddPaciente = (FloatingActionButton) view.findViewById(R.id.addPaciente);
-        mAddPaciente.setOnClickListener(new View.OnClickListener() {
+
+        mAddMedicos = (FloatingActionButton) view.findViewById(R.id.addMedico);
+        mAddMedicos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getContext(), CrudPacienteActivity.class);
+                Intent i = new Intent(getContext(), CrudMedicoActivity.class);
                 startActivityForResult(i, AtividadesCrud.ACAO_NOVO_CRUD);
             }
         });
@@ -82,49 +85,49 @@ public class ListagemPacientesFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Paciente p = null;
-        PacienteDB db = new PacienteDB(getActivity());
+        Medico m = null;
+        MedicoDB db = new MedicoDB(getActivity());
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == AtividadesCrud.ACAO_NOVO_CRUD) {
-                p = Parcels.unwrap(data.getParcelableExtra(AtividadesCrud.OBJETO_PACIENTE));
-                db.Inserir(p);
+                m = Parcels.unwrap(data.getParcelableExtra(AtividadesCrud.OBJETO_MEDICO));
+                db.Inserir(m);
                 AtualizaListagem();
             } else if (requestCode == AtividadesCrud.ACAO_ALTERAR_CRUD) {
-                p = Parcels.unwrap(data.getParcelableExtra(AtividadesCrud.OBJETO_PACIENTE));
-                db.Update(p);
+                m = Parcels.unwrap(data.getParcelableExtra(AtividadesCrud.OBJETO_MEDICO));
+                db.Update(m);
                 AtualizaListagem();
             }
         }
     }
 
     public void AtualizaListagem() {
-        mPacientes.clear();
-        PacienteDB db = new PacienteDB(getActivity());
-        mPacientes.addAll(db.Listagem());
+        mMedicos.clear();
+        MedicoDB db = new MedicoDB(getActivity());
+        mMedicos.addAll(db.Listagem());
         mAdapter.notifyDataSetChanged();
-        mQtdIntes.setText(String.valueOf(mPacientes.size()));
+        mQtdIntes.setText(String.valueOf(mMedicos.size()));
     }
 
-    private class PacientesRecycleAdapter extends RecyclerView.Adapter<PacientesViewHolderAdapter> {
+    private class MedicosRecycleAdapter extends RecyclerView.Adapter<MedicoViewHolderAdapter> {
 
-        private ArrayList<Paciente> mValues;
+        private ArrayList<Medico> mValues;
 
-        public PacientesRecycleAdapter(Context context, ArrayList<Paciente> items) {
+        public MedicosRecycleAdapter(Context context, ArrayList<Medico> items) {
             mValues = items;
         }
 
         @Override
-        public PacientesViewHolderAdapter onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_paciente, parent, false);
-            return new PacientesViewHolderAdapter(view);
+        public MedicoViewHolderAdapter onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_medico, parent, false);
+            return new MedicoViewHolderAdapter(view);
         }
 
-        public Paciente getValueAt(int position) {
+        public Medico getValueAt(int position) {
             return mValues.get(position);
         }
 
         @Override
-        public void onBindViewHolder(final PacientesViewHolderAdapter holder, final int position) {
+        public void onBindViewHolder(final MedicoViewHolderAdapter holder, final int position) {
             holder.bind(getValueAt(position));
         }
 
@@ -134,29 +137,26 @@ public class ListagemPacientesFragment extends Fragment {
         }
     }
 
-    public class PacientesViewHolderAdapter extends RecyclerView.ViewHolder {
+    public class MedicoViewHolderAdapter extends RecyclerView.ViewHolder {
         private View context;
-        @Bind(R.id.lblPaciente)
-        public TextView mNomePaciente;
-        @Bind(R.id.lblEndereco)
-        public TextView mEndereco;
-        @Bind(R.id.lblComplemento)
-        public TextView mComplemento;
+        @Bind(R.id.lblMedico)
+        public TextView mMedico;
+        @Bind(R.id.lblEspecialidade)
+        public TextView mEspecialidade;
 
-        @Bind(R.id.toolbarPaciente)
+        @Bind(R.id.toolbarMedico)
         public Toolbar mToolbar;
 
-        public PacientesViewHolderAdapter(View view) {
+        public MedicoViewHolderAdapter(View view) {
             super(view);
             ButterKnife.bind(this, view);
             context = view;
         }
 
-        public void bind(final Paciente paciente) {
-            mNomePaciente.setText(paciente.getNome());
-            mEndereco.setText(paciente.getRua() + ", " + paciente.getNumero());
-            mComplemento.setText(paciente.getComplemento());
-
+        public void bind(final Medico medico) {
+            mMedico.setText(medico.getNome());
+            mEspecialidade.setText(medico.getEspecialidade());
+            
             mToolbar.getMenu().clear();
             mToolbar.inflateMenu(R.menu.crud_menu);
             mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -164,14 +164,14 @@ public class ListagemPacientesFragment extends Fragment {
                 public boolean onMenuItemClick(MenuItem item) {
                     int id = item.getItemId();
                     if (id == R.id.modificar) {
-                        Intent i = new Intent(context.getContext(), CrudPacienteActivity.class);
+                        Intent i = new Intent(context.getContext(), CrudMedicoActivity.class);
+                        Parcelable parcelable = Parcels.wrap(medico);
+                        i.putExtra(AtividadesCrud.OBJETO_MEDICO, parcelable);
                         i.putExtra(AtividadesCrud.CONTEXTO_CRUD, true);
-                        Parcelable parcelable = Parcels.wrap(paciente);
-                        i.putExtra(AtividadesCrud.OBJETO_PACIENTE, parcelable);
                         startActivityForResult(i, AtividadesCrud.ACAO_ALTERAR_CRUD);
                     } else if (id == R.id.excluir) {
-                        PacienteDB db = new PacienteDB(getActivity());
-                        db.Delete(paciente.getId());
+                        MedicoDB db = new MedicoDB(getActivity());
+                        db.Delete(medico.getId());
                         AtualizaListagem();
                     }
                     return true;

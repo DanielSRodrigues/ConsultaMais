@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context=".NovoMedicoFragment">
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/NomeMedico"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/Name"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/Especialidade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/Especialidade"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnSalvar"
+        android:layout_width="112dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="@string/save"/>
+
+</LinearLayout>

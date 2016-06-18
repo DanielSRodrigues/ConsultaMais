@@ -1,6 +1,9 @@
 package bestsolutions.net.consultamais.entidades;
 
 
+import org.parceler.Parcel;
+
+@Parcel
 public class Medico {
     private int Id;
     private String Nome;
@@ -23,7 +26,11 @@ public class Medico {
         Nome = nome;
     }
 
-    public String getEspecialidade() { return Especialidade; }
+    public String getEspecialidade() {
+        return Especialidade;
+    }
 
-    public void setEspecialidade(String esp){ Especialidade = esp; }
+    public void setEspecialidade(String esp) {
+        Especialidade = esp;
+    }
 }

@@ -25,8 +25,12 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="AppThemeNoToolbar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppThemeNoToolbar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark"/>
 
-    <style name="AppThemeNoToolbar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppbarWithoutShadow" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="windowActionModeOverlay">true</item>
+    </style>
+
+    <style name="AppThemeNoToolbar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
 </resources>

@@ -21,9 +21,22 @@
     <string name="SelectDate">Select date:</string>
     <string name="consultas">Consult</string>
     <string name="cep">Cep</string>
+    <string name="Numero">Number</string>
     <string name="medico">Médico</string>
     <string name="Especialidade">Especialidade</string>
     <string name="medicos">Médicos</string>
+    <string name="modify">Modify</string>
+    <string name="delete">Delete</string>
+    <string name="CPF">CPF</string>
+    <string name="Adress">Endereço</string>
+    <string name="save">Save</string>
+    <string name="new_doctor">New Doctor</string>
+    <string name="modify_doctor">Modify Doctor</string>
+
+    <string-array name="Sexo">
+        <item>Masculino</item>
+        <item>Feminino</item>
+    </string-array>
 
     <string-array name="especialidadesSpinner">
         <item>Clínico Geral</item>

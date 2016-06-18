@@ -3,6 +3,7 @@ package bestsolutions.net.consultamais;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,22 +15,23 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 
 import bestsolutions.net.consultamais.entidades.Consulta;
-import layout.NovoMedico;
 
 public class PrincipalAgente extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ListagemConsultasFragment.OnConsultaClicked {
+
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal_agente);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -76,31 +78,24 @@ public class PrincipalAgente extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Fragment frag = null;
 
         if (id == R.id.nav_Consulta) {
-            ListagemConsultasFragment detalheProdutoFragment = ListagemConsultasFragment.newInstance();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.content, detalheProdutoFragment, "Listagem")
-                    .commit();
+            frag = ListagemConsultasFragment.newInstance();
         }
         if (id == R.id.nav_Paciente) {
-            ListagemPacientesFragment detalheProdutoFragment = ListagemPacientesFragment.newInstance();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.content, detalheProdutoFragment, "Listagem")
-                    .commit();
+            frag = ListagemPacientesFragment.newInstance();
         }
         if (id == R.id.nav_Medico) {
-            ListagemMedicosFragment detalheProdutoFragment = ListagemMedicosFragment.newInstance();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.content, detalheProdutoFragment, "Listagem")
-                    .commit();
-
+            frag = ListagemMedicosFragment.newInstance();
         } else if (id == R.id.nav_sair) {
             finish();
         }
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.content, frag, "Listagem")
+                .commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

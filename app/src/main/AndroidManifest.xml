@@ -32,7 +32,13 @@
         </activity>
         <activity
             android:name=".CrudPacienteActivity"
-            android:label="@string/title_activity_principal_agente">
+            android:label="Pacientes"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PrincipalAgente"/>
+        </activity>
+        <activity android:name=".CrudMedicoActivity">
         </activity>
     </application>
 
