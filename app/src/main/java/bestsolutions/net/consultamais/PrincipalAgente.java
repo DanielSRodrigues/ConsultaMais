@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import bestsolutions.net.consultamais.entidades.Consulta;
 
 public class PrincipalAgente extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ListagemConsultasFragment.OnConsultaClicked {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar mToolbar;
 
@@ -61,9 +61,6 @@ public class PrincipalAgente extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
@@ -100,38 +97,5 @@ public class PrincipalAgente extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    @Override
-    public void OnConsultaClicked(ArrayList<Consulta> consultas) {
-
-        ListagemConsultasFragment listagemConsultasFragment = (ListagemConsultasFragment)
-                getSupportFragmentManager().findFragmentById(R.id.fragmentListagemConsulta);
-        listagemConsultasFragment.AtualizaListagem();
-
-        /*if (listagemConsultasFragment != null) {
-            // If article frag is available, we're in two-pane layout...
-
-            // Call a method in the ArticleFragment to update its content
-            listagemConsultasFragment.updateArticleView(position);
-        } else {
-            // Otherwise, we're in the one-pane layout and must swap frags...
-
-            // Create fragment and give it an argument for the selected article
-            ArticleFragment newFragment = new ArticleFragment();
-            Bundle args = new Bundle();
-            args.putInt(ArticleFragment.ARG_POSITION, position);
-            newFragment.setArguments(args);
-
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-            // Replace whatever is in the fragment_container view with this fragment,
-            // and add the transaction to the back stack so the user can navigate back
-            transaction.replace(R.id.fragment_container, newFragment);
-            transaction.addToBackStack(null);
-
-            // Commit the transaction
-            transaction.commit();
-        }*/
     }
 }

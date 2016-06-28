@@ -1,39 +1,22 @@
 package bestsolutions.net.consultamais.entidades;
 
-import java.sql.Time;
-import java.util.Date;
-import java.util.Timer;
+import org.parceler.Parcel;
 
-/**
- * Created by Daniel Rodrigues on 06/04/2016.
- */
+@Parcel
 public class Consulta {
+
+    private int Id;
     private String Paciente;
     private String NomeMedico;
-    private String EspecialidadeMedico;
-    private Date DataHoraAtendimento;
+    private String DataAtendimento;
+    private String HoraAtendimento;
 
-    public Consulta(String paciente, String especialidadeMedico, Date dataHoraAtendimento, String nomeMedico) {
-        Paciente = paciente;
-        EspecialidadeMedico = especialidadeMedico;
-        DataHoraAtendimento = dataHoraAtendimento;
-        NomeMedico = nomeMedico;
+    public int getId() {
+        return Id;
     }
 
-    public String getNomeMedico() {
-        return NomeMedico;
-    }
-
-    public void setNomeMedico(String nomeMedico) {
-        NomeMedico = nomeMedico;
-    }
-
-    public String getEspecialidadeMedico() {
-        return EspecialidadeMedico;
-    }
-
-    public void setEspecialidadeMedico(String especialidadeMedico) {
-        EspecialidadeMedico = especialidadeMedico;
+    public void setId(int id) {
+        Id = id;
     }
 
     public String getPaciente() {
@@ -44,11 +27,27 @@ public class Consulta {
         Paciente = paciente;
     }
 
-    public Date getDataHoraAtendimento() {
-        return DataHoraAtendimento;
+    public String getNomeMedico() {
+        return NomeMedico;
     }
 
-    public void setDataHoraAtendimento(Date dataHoraAtendimento) {
-        DataHoraAtendimento = dataHoraAtendimento;
+    public void setNomeMedico(String nomeMedico) {
+        NomeMedico = nomeMedico;
+    }
+
+    public String getDataAtendimento() {
+        return DataAtendimento;
+    }
+
+    public void setDataAtendimento(String dataAtendimento) {
+        DataAtendimento = dataAtendimento;
+    }
+
+    public String getHoraAtendimento() {
+        return HoraAtendimento;
+    }
+
+    public void setHoraAtendimento(String horaAtendimento) {
+        HoraAtendimento = horaAtendimento;
     }
 }

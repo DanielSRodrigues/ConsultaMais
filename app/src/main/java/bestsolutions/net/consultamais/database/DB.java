@@ -23,7 +23,7 @@ public class DB {
         add(new Especialidade("Ortopedista"));
     }};
 
-    static public ArrayList<Consulta> consultas = new ArrayList<Consulta>() {{
+    /*static public ArrayList<Consulta> consultas = new ArrayList<Consulta>() {{
         // String paciente, String especialidadeMedico, Date dataHoraAtendimento
         add(new Consulta("Felipe Generico", "Clinico Geral", new Date(), "Daniel Magalhães"));
         add(new Consulta("Elton", "Pediatra", new Date(), "Daniel Magalhães"));
@@ -34,5 +34,5 @@ public class DB {
         add(new Consulta("Ivlison Souza", "Pediatra", new Date(), "Daniel Magalhães"));
         add(new Consulta("Nelson Glauber", "Pediatra", new Date(), "Daniel Magalhães"));
 
-    }};
+    }};*/
 }

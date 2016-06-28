@@ -109,6 +109,14 @@ public class PacienteDB {
         return filmes;
     }
 
+    public ArrayList<String> ListagemNomesPacientes() {
+        ArrayList<String> pacientes = new ArrayList<String>();
+        for (Paciente p : Listagem()) {
+            pacientes.add(p.getNome());
+        }
+        return pacientes;
+    }
+
     private ContentValues valuesFromClass(Paciente paciente) {
 
         ContentValues contentValues = new ContentValues();

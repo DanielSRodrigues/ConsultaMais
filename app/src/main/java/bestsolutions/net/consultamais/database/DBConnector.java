@@ -27,12 +27,22 @@ public class DBConnector extends SQLiteOpenHelper {
                 PacienteDB.COLUMN_CEP + " TEXT, " +
                 PacienteDB.COLUMN_BAIRRO + " TEXT, " +
                 PacienteDB.COLUMN_CIDADE + " TEXT, " +
-                PacienteDB.COLUMN_ESTADO + " TEXT )");
+                PacienteDB.COLUMN_ESTADO + " TEXT ); ");
 
         db.execSQL("CREATE TABLE " + MedicoDB.TABLE_NAME + "(" +
                 MedicoDB.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 MedicoDB.COLUMN_NOME + " TEXT NOT NULL, " +
-                MedicoDB.COLUMN_ESPECIALIDADE + " TEXT NOT NULL) ");
+                MedicoDB.COLUMN_ESPECIALIDADE + " TEXT NOT NULL, " +
+                MedicoDB.COLUMN_HORAINICIO + " TEXT NOT NULL, " +
+                MedicoDB.COLUMN_HORAFIM + " INTEGER NOT NULL, " +
+                MedicoDB.COLUMN_TEMPOMEDIO + " INTEGER NOT NULL); ");
+
+        db.execSQL("CREATE TABLE " + ConsultaDB.TABLE_NAME + "(" +
+                ConsultaDB.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                ConsultaDB.COLUMN_PACIENTE + " TEXT NOT NULL, " +
+                ConsultaDB.COLUMN_MEDICO + " TEXT NOT NULL, " +
+                ConsultaDB.COLUMN_DATA + " TEXT NOT NULL, " +
+                ConsultaDB.COLUMN_HORA + " TEXT NOT NULL); ");
     }
 
     @Override

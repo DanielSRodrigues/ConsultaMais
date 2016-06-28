@@ -15,6 +15,10 @@ public class MedicoDB {
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_NOME = "nome";
     public static final String COLUMN_ESPECIALIDADE = "especialidade";
+    public static final String COLUMN_HORAINICIO = "horainicio";
+    public static final String COLUMN_HORAFIM = "horafim";
+    public static final String COLUMN_TEMPOMEDIO = "tempomedio";
+
 
     private Context mContext;
 
@@ -69,12 +73,19 @@ public class MedicoDB {
         int idxID = cursor.getColumnIndex(MedicoDB.COLUMN_ID);
         int idxNome = cursor.getColumnIndex(MedicoDB.COLUMN_NOME);
         int idxEspecialidade = cursor.getColumnIndex(MedicoDB.COLUMN_ESPECIALIDADE);
+        int idxHoraInicio = cursor.getColumnIndex(MedicoDB.COLUMN_HORAINICIO);
+        int idxHoraFim = cursor.getColumnIndex(MedicoDB.COLUMN_HORAFIM);
+        int idxTempoMedio = cursor.getColumnIndex(MedicoDB.COLUMN_TEMPOMEDIO);
+
         if (cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
                 Medico med = new Medico();
                 med.setId(cursor.getInt(idxID));
                 med.setNome(cursor.getString(idxNome));
                 med.setEspecialidade(cursor.getString(idxEspecialidade));
+                med.setHoraInicio(cursor.getInt(idxHoraInicio));
+                med.setHoraFim(cursor.getInt(idxHoraFim));
+                med.setTempoMedioConsulta(cursor.getInt(idxTempoMedio));
                 medicos.add(med);
             }
         }
@@ -88,6 +99,9 @@ public class MedicoDB {
         ContentValues contentValues = new ContentValues();
         contentValues.put(MedicoDB.COLUMN_NOME, med.getNome());
         contentValues.put(MedicoDB.COLUMN_ESPECIALIDADE, med.getEspecialidade());
+        contentValues.put(MedicoDB.COLUMN_HORAINICIO, med.getHoraInicio());
+        contentValues.put(MedicoDB.COLUMN_HORAFIM, med.getHoraFim());
+        contentValues.put(MedicoDB.COLUMN_TEMPOMEDIO, med.getTempoMedioConsulta());
         return contentValues;
     }
 }

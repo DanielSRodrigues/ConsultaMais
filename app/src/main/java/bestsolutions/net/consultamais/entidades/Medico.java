@@ -9,6 +9,33 @@ public class Medico {
     private String Nome;
     private String Especialidade;
 
+    private int HoraInicio;
+    private int HoraFim;
+    private int TempoMedioConsulta;
+
+    public int getHoraInicio() {
+        return HoraInicio;
+    }
+
+    public void setHoraInicio(int horaInicio) {
+        HoraInicio = horaInicio;
+    }
+
+    public int getHoraFim() {
+        return HoraFim;
+    }
+
+    public void setHoraFim(int horaFim) {
+        HoraFim = horaFim;
+    }
+
+    public int getTempoMedioConsulta() {
+        return TempoMedioConsulta;
+    }
+
+    public void setTempoMedioConsulta(int tempoMedioConsulta) {
+        TempoMedioConsulta = tempoMedioConsulta;
+    }
 
     public int getId() {
         return Id;

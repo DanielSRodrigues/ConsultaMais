@@ -10,6 +10,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import org.parceler.Parcels;
@@ -27,6 +29,12 @@ public class NovoMedicoFragment extends Fragment {
     TextView mNomeMedico;
     @Bind(R.id.Especialidade)
     TextView mEspecialidade;
+    @Bind(R.id.Inicio)
+    Spinner mInicio;
+    @Bind(R.id.Fim)
+    Spinner mFim;
+    @Bind(R.id.TempoMedio)
+    Spinner mTempoMedio;
 
     public NovoMedicoFragment() {
     }
@@ -46,6 +54,21 @@ public class NovoMedicoFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_novo_medico, container, false);
         ButterKnife.bind(this, v);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.horas, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mInicio.setAdapter(adapter);
+
+        ArrayAdapter<CharSequence> adapterFim = ArrayAdapter.createFromResource(getActivity(),
+                R.array.horas, android.R.layout.simple_spinner_item);
+        adapterFim.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mFim.setAdapter(adapterFim);
+
+        ArrayAdapter<CharSequence> adapterTempoMedio = ArrayAdapter.createFromResource(getActivity(),
+                R.array.tempoMedio, android.R.layout.simple_spinner_item);
+        adapterTempoMedio.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mTempoMedio.setAdapter(adapterTempoMedio);
         return v;
     }
 
@@ -54,6 +77,9 @@ public class NovoMedicoFragment extends Fragment {
         Medico medico = new Medico();
         medico.setNome(mNomeMedico.getText().toString());
         medico.setEspecialidade(mEspecialidade.getText().toString());
+        medico.setHoraInicio(Integer.parseInt(mInicio.getSelectedItem().toString()));
+        medico.setHoraFim(Integer.parseInt(mFim.getSelectedItem().toString()));
+        medico.setTempoMedioConsulta(Integer.parseInt(mTempoMedio.getSelectedItem().toString()));
 
         Intent returnIntent = new Intent();
         Parcelable parcelable = Parcels.wrap(medico);

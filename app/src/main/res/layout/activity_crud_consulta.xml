@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="bestsolutions.net.consultamais.CadastrarConsulta">
+    tools:context="bestsolutions.net.consultamais.CrudMedicoActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/action_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppThemeNoToolbar.AppBarOverlay">
@@ -17,18 +19,17 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-
-            app:popupTheme="@style/AppThemeNoToolbar.PopupOverlay" />
+            app:popupTheme="@style/AppThemeNoToolbar.PopupOverlay"/>
 
     </android.support.design.widget.AppBarLayout>
 
-    <fragment
-        android:id="@+id/fragmentListagemConsulta"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:name="bestsolutions.net.consultamais.NovaConsultaFragment"
+    <FrameLayout
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
         android:layout_weight="1"
-        tools:layout="@layout/fragment_nova_consulta" />
+        android:padding="16dp">
+    </FrameLayout>
 
 </android.support.design.widget.CoordinatorLayout>

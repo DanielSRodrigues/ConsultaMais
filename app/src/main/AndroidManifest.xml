@@ -24,7 +24,7 @@
             android:label="@string/title_activity_principal_agente"
             android:theme="@style/AppThemeNoToolbar.NoActionBar"/>
         <activity
-            android:name=".CadastrarConsulta"
+            android:name=".CrudConsultaActivity"
             android:label="@string/title_activity_principal_agente">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

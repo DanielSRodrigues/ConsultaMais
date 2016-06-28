@@ -1,12 +1,11 @@
 package bestsolutions.net.consultamais;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,34 +14,34 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
+import org.parceler.Parcels;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import bestsolutions.net.consultamais.database.ConsultaDB;
 import bestsolutions.net.consultamais.database.DB;
+import bestsolutions.net.consultamais.database.MedicoDB;
+import bestsolutions.net.consultamais.entidades.AtividadesCrud;
 import bestsolutions.net.consultamais.entidades.Consulta;
+import bestsolutions.net.consultamais.entidades.Medico;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 
 public class ListagemConsultasFragment extends Fragment {
 
-    private OnConsultaClicked mListener;
     @Bind(R.id.listConsultas)
     public RecyclerView mListagemConsulta;
     @Bind(R.id.qtdItens)
     public TextView mQtdIntes;
+
     public AtendimentosRecycleAdapter mAdapter;
 
     public ArrayList<Consulta> mConsultas = new ArrayList<>();
 
     public ListagemConsultasFragment() {
-        // Required empty public constructor
     }
 
     public static ListagemConsultasFragment newInstance() {
@@ -58,7 +57,7 @@ public class ListagemConsultasFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_listagem_consultas, container, false);
         ButterKnife.bind(this, view);
 
@@ -72,8 +71,8 @@ public class ListagemConsultasFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getContext(), CadastrarConsulta.class);
-                startActivity(i);
+                Intent i = new Intent(getContext(), CrudConsultaActivity.class);
+                startActivityForResult(i, AtividadesCrud.ACAO_NOVO_CRUD);
             }
         });
 
@@ -81,42 +80,28 @@ public class ListagemConsultasFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        /*if (context instanceof OnConsultaClicked) {
-            mListener = (OnConsultaClicked) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }*/
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Consulta m = null;
+        ConsultaDB db = new ConsultaDB(getActivity());
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == AtividadesCrud.ACAO_NOVO_CRUD) {
+                m = Parcels.unwrap(data.getParcelableExtra(AtividadesCrud.OBJETO_CONSULTA));
+                db.Inserir(m);
+                AtualizaListagem();
+            } else if (requestCode == AtividadesCrud.ACAO_ALTERAR_CRUD) {
+                m = Parcels.unwrap(data.getParcelableExtra(AtividadesCrud.OBJETO_CONSULTA));
+                db.Update(m);
+                AtualizaListagem();
+            }
+        }
     }
 
     public void AtualizaListagem() {
         mConsultas.clear();
-        mConsultas.addAll(DB.consultas);
+        ConsultaDB db = new ConsultaDB(getActivity());
+        mConsultas.addAll(db.Listagem());
         mAdapter.notifyDataSetChanged();
-        mQtdIntes.setText("" + mConsultas.size());
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnConsultaClicked {
-        // TODO: Update argument type and name
-        void OnConsultaClicked(ArrayList<Consulta> consultas);
+        mQtdIntes.setText(String.valueOf(mConsultas.size()));
     }
 
     private class AtendimentosRecycleAdapter extends RecyclerView.Adapter<ConsultaViewHolderAdapter> {
@@ -148,7 +133,8 @@ public class ListagemConsultasFragment extends Fragment {
         }
     }
 
-    public class ConsultaViewHolderAdapter extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ConsultaViewHolderAdapter extends RecyclerView.ViewHolder {
+
         @Bind(R.id.lblDataAtendimento)
         public TextView DataAtendimento;
         @Bind(R.id.lblHoraAtendimento)
@@ -161,26 +147,14 @@ public class ListagemConsultasFragment extends Fragment {
         public ConsultaViewHolderAdapter(View view) {
             super(view);
             ButterKnife.bind(this, view);
-            view.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View v) {
-          /*  Intent i = new Intent(v.getContext(), OSConsulta.class);
-            i.putExtra("Item", _OSTemp);
-            v.getContext().startActivity(i);*/
         }
 
         public void bindOS(Consulta consulta) {
-            DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-            DateFormat dh = new SimpleDateFormat("HH:mm");
 
-            String reportDate = df.format(consulta.getDataHoraAtendimento());
-            String hora = dh.format(consulta.getDataHoraAtendimento());
-            HoraAtendimento.setText(hora);
-            DataAtendimento.setText(reportDate);
+            HoraAtendimento.setText(consulta.getHoraAtendimento());
+            DataAtendimento.setText(consulta.getDataAtendimento());
             Paciente.setText(consulta.getPaciente());
-            Especialidade.setText(consulta.getEspecialidadeMedico());
+            Especialidade.setText(consulta.getNomeMedico());
 
         }
 

@@ -7,56 +7,62 @@
               android:weightSum="1"
               tools:context=".NovaConsultaFragment">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Paciente"/>
+
     <android.support.v7.widget.AppCompatSpinner
         android:id="@+id/listaPacientes"
         style="@style/Widget.AppCompat.Spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:entries="@array/listaPacientes"
-        android:spinnerMode="dialog">
-    </android.support.v7.widget.AppCompatSpinner>
-
-
-    <android.support.v7.widget.AppCompatSpinner
-        android:id="@+id/especialidadesSpinner"
-        style="@style/Widget.AppCompat.Spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:entries="@array/especialidadesSpinner"
-        android:spinnerMode="dialog">
-    </android.support.v7.widget.AppCompatSpinner>
-
-    <EditText
-        android:id="@+id/editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="time"
-        android:text="Hora da Consulta"/>
+        android:spinnerMode="dialog">
+    </android.support.v7.widget.AppCompatSpinner>
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.20"
-        android:text="Escolha a data da consulta"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-    <CalendarView
-        android:id="@+id/calendarView1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_gravity="right"
-        android:layout_marginTop="20dp"
-        android:showWeekNumber="false"></CalendarView>
+        android:layout_height="wrap_content"
+        android:text="Médico"/>
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/listaMedicos"
+        style="@style/Widget.AppCompat.Spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dialog">
+
+    </android.support.v7.widget.AppCompatSpinner>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/ic_event_black_24dp"
+            />
+
+        <Button
+            android:id="@+id/btnHora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/ic_query_builder_black_24dp"
+            />
+
+
+    </LinearLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnSalvar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:shadowColor="@color/cardview_dark_background"
         android:text="Salvar"/>
+
 
 </LinearLayout>
