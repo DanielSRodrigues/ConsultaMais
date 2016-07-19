@@ -120,6 +120,7 @@ public class PacienteDB {
     private ContentValues valuesFromClass(Paciente paciente) {
 
         ContentValues contentValues = new ContentValues();
+        contentValues.put(PacienteDB.COLUMN_ID, paciente.getId());
         contentValues.put(PacienteDB.COLUMN_NOME, paciente.getNome());
         contentValues.put(PacienteDB.COLUMN_SEXO, paciente.getSexo());
         contentValues.put(PacienteDB.COLUMN_TELEFONE, paciente.getTelefone());

@@ -1,10 +1,11 @@
 package bestsolutions.net.consultamais;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -17,16 +18,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.parceler.Parcels;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import bestsolutions.net.consultamais.database.PacienteDB;
 import bestsolutions.net.consultamais.entidades.AtividadesCrud;
 import bestsolutions.net.consultamais.entidades.Paciente;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 public class ListagemPacientesFragment extends Fragment {
@@ -87,12 +99,12 @@ public class ListagemPacientesFragment extends Fragment {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == AtividadesCrud.ACAO_NOVO_CRUD) {
                 p = Parcels.unwrap(data.getParcelableExtra(AtividadesCrud.OBJETO_PACIENTE));
-                db.Inserir(p);
-                AtualizaListagem();
+                InserirPacienteTask task = new InserirPacienteTask(p);
+                task.execute();
             } else if (requestCode == AtividadesCrud.ACAO_ALTERAR_CRUD) {
                 p = Parcels.unwrap(data.getParcelableExtra(AtividadesCrud.OBJETO_PACIENTE));
-                db.Update(p);
-                AtualizaListagem();
+                UpdatePacienteTask task = new UpdatePacienteTask(p);
+                task.execute();
             }
         }
     }
@@ -170,13 +182,211 @@ public class ListagemPacientesFragment extends Fragment {
                         i.putExtra(AtividadesCrud.OBJETO_PACIENTE, parcelable);
                         startActivityForResult(i, AtividadesCrud.ACAO_ALTERAR_CRUD);
                     } else if (id == R.id.excluir) {
-                        PacienteDB db = new PacienteDB(getActivity());
-                        db.Delete(paciente.getId());
-                        AtualizaListagem();
+
+                        DeletePacienteTask task = new DeletePacienteTask(paciente);
+                        try {
+                            task.execute().get();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        }
                     }
                     return true;
                 }
             });
+        }
+    }
+
+    public class InserirPacienteTask extends AsyncTask<Void, Void, Paciente> {
+
+        ProgressDialog progress = null;
+        public final MediaType JSON
+                = MediaType.parse("application/json; charset=utf-8");
+
+        Paciente mPaciente;
+        String msgErro = "";
+
+        @Override
+        protected void onPreExecute() {
+            progress = new ProgressDialog(getActivity());
+            progress.setMessage("Sincronizando registro.");
+            progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progress.setIndeterminate(true);
+            progress.show();
+        }
+
+        public InserirPacienteTask(Paciente paciente) {
+            mPaciente = paciente;
+        }
+
+        @Override
+        protected Paciente doInBackground(Void... params) {
+            OkHttpClient client = new OkHttpClient();
+            String url = "http://10.0.2.2:5000/api/pacientes";
+            Gson json = new GsonBuilder().create();
+            RequestBody body = RequestBody.create(JSON, json.toJson(mPaciente));
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(body)
+                    .build();
+            Response response = null;
+            Paciente p = null;
+            try {
+                response = client.newCall(request).execute();
+                Gson pacienteCadastrado = new GsonBuilder().create();
+                p = pacienteCadastrado.fromJson(response.body().string(), Paciente.class);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return p;
+        }
+
+        @Override
+        protected void onPostExecute(Paciente paciente) {
+            if (progress != null) {
+                progress.dismiss();
+            }
+
+            if (paciente != null) {
+                PacienteDB db = new PacienteDB(getActivity());
+                db.Inserir(paciente);
+                AtualizaListagem();
+            } else {
+                Toast.makeText(getContext(),
+                        "Erro ao alterar registro, por favor tentar novamente." + msgErro, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public class UpdatePacienteTask extends AsyncTask<Void, Void, Paciente> {
+
+        public final MediaType JSON
+                = MediaType.parse("application/json; charset=utf-8");
+
+        Paciente mPaciente;
+
+        String msgErro = "";
+
+        ProgressDialog progress = null;
+
+        @Override
+        protected void onPreExecute() {
+            progress = new ProgressDialog(getActivity());
+            progress.setMessage("Sincronizando registro.");
+            progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progress.setIndeterminate(true);
+            progress.show();
+        }
+
+        public UpdatePacienteTask(Paciente paciente) {
+            mPaciente = paciente;
+        }
+
+        @Override
+        protected Paciente doInBackground(Void... params) {
+            OkHttpClient client = new OkHttpClient();
+            String url = "http://10.0.2.2:5000/api/pacientes/" + mPaciente.getId();
+            Gson json = new GsonBuilder().create();
+            RequestBody body = RequestBody.create(JSON, json.toJson(mPaciente));
+            Request request = new Request.Builder()
+                    .url(url)
+                    .put(body)
+                    .build();
+            Response response = null;
+            Paciente p = null;
+            try {
+                response = client.newCall(request).execute();
+                Gson pacienteCadastrado = new GsonBuilder().create();
+                p = pacienteCadastrado.fromJson(response.body().string(), Paciente.class);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                msgErro = e.getMessage();
+            }
+            return p;
+        }
+
+        @Override
+        protected void onPostExecute(Paciente paciente) {
+            if (progress != null) {
+                progress.dismiss();
+            }
+
+            if (paciente != null) {
+                PacienteDB db = new PacienteDB(getActivity());
+                db.Update(paciente);
+                AtualizaListagem();
+            } else {
+                Toast.makeText(getContext(),
+                        "Erro ao alterar registro, por favor tentar novamente." + msgErro, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public class DeletePacienteTask extends AsyncTask<Void, Void, Paciente> {
+
+        public final MediaType JSON
+                = MediaType.parse("application/json; charset=utf-8");
+
+        Paciente mPaciente;
+        String msgErro = "";
+
+        ProgressDialog progress = null;
+
+        @Override
+        protected void onPreExecute() {
+            progress = new ProgressDialog(getActivity());
+            progress.setMessage("Sincronizando registro.");
+            progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progress.setIndeterminate(true);
+            progress.show();
+        }
+
+        public DeletePacienteTask(Paciente paciente) {
+            mPaciente = paciente;
+        }
+
+        @Override
+        protected Paciente doInBackground(Void... params) {
+            OkHttpClient client = new OkHttpClient();
+            String url = "http://10.0.2.2:5000/api/pacientes/" + mPaciente.getId();
+            Gson json = new GsonBuilder().create();
+            RequestBody body = RequestBody.create(JSON, json.toJson(mPaciente));
+            Request request = new Request.Builder()
+                    .url(url)
+                    .delete()
+                    .build();
+            Response response = null;
+            Paciente p = null;
+            try {
+                response = client.newCall(request).execute();
+                Gson pacienteCadastrado = new GsonBuilder().create();
+                p = pacienteCadastrado.fromJson(response.body().string(), Paciente.class);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return p;
+        }
+
+        @Override
+        protected void onPostExecute(Paciente paciente) {
+            if (progress != null) {
+                progress.dismiss();
+            }
+
+            if (paciente != null) {
+                PacienteDB db = new PacienteDB(getActivity());
+                db.Delete(mPaciente.getId());
+                AtualizaListagem();
+                Toast.makeText(getContext(),
+                        "Deletado com sucesso", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getContext(),
+                        "Erro ao alterar registro, por favor tentar novamente." + msgErro, Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

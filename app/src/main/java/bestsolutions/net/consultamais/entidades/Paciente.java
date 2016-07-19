@@ -1,25 +1,38 @@
 package bestsolutions.net.consultamais.entidades;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.parceler.Parcel;
 
 @Parcel
 public class Paciente {
 
+    @SerializedName("id")
     private int Id;
+    @SerializedName("nome")
     private String mNome;
+    @SerializedName("sexo")
     private int mSexo;
 
+    @SerializedName("telefone")
     private String mTelefone;
+    @SerializedName("celular")
     private String mCelular;
 
+    @SerializedName("rua")
     private String mRua;
+    @SerializedName("numero")
     private String mNumero;
+    @SerializedName("complemento")
     private String mComplemento;
+    @SerializedName("cep")
     private String mCep;
+    @SerializedName("bairro")
     private String mBairro;
+    @SerializedName("cidade")
     private String mCidade;
+    @SerializedName("estado")
     private String mEstado;
-
 
     public int getId() {
         return Id;
